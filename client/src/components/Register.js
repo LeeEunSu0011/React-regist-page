@@ -9,6 +9,15 @@ class Register extends React.Component{
                 <TableCell>{this.props.birthday}</TableCell>
                 <TableCell>{this.props.gender}</TableCell>
                 <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
+                <TableCell>{this.props.job}</TableCell>
             </TableRow>
         )
     }
