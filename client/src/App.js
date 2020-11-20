@@ -15,7 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 /* --------------------- styles --------------------- */
 import { withStyles } from '@material-ui/core/styles';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade } from '@material-ui/core/styles';
 
 const styles = theme => ({
   menu :{
@@ -81,6 +81,15 @@ const styles = theme => ({
       },
     },
   },
+  tableheadWidth : {
+    minwidth : '30%',
+  },
+  tableLeft : {
+    width : '30%',
+  },
+  tableRight : {
+    width : '70%',
+  }
 });
 
 class App extends Component {
@@ -110,12 +119,7 @@ class App extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-            >
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
@@ -125,22 +129,46 @@ class App extends Component {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
+              <InputBase placeholder="Search…" classes={{root: classes.inputRoot, input: classes.inputInput, }} inputProps={{ 'aria-label': 'search' }} />
             </div>
           </Toolbar>
         </AppBar>
         <div className={classes.menu}></div>
         <Paper className={classes.Paper}>
           <Table className={classes.table}>
-            <TableHead>
-              { cellList.map(c => { return ( <TableCell>{c}</TableCell>);})}
+              <TableHead colspan="3" align="center">入力フォーム</TableHead>
+              <TableBody align="center">
+                <TableRow>
+                  <TableCell className={classes.tableLeft}>名前</TableCell>
+                  <TableCell>input</TableCell>
+                  <TableCell>input</TableCell>
+                  <TableCell>input</TableCell>
+                  <TableCell>input</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>bb</TableCell>
+                  <TableCell>input</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>cc</TableCell>
+                  <TableCell>input</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>dd</TableCell>
+                  <TableCell>input</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>ee</TableCell>
+                  <TableCell>input</TableCell>
+                </TableRow>
+              </TableBody>
+          </Table>
+        </Paper>
+        <div className={classes.menu}></div>
+        <Paper className={classes.Paper}>
+          <Table className={classes.table}>
+            <TableHead className={classes.tableheadWidth}>
+              { cellList.map(c => { return ( <TableCell >{c}</TableCell>);})}
             </TableHead>
             <TableBody>
               {
