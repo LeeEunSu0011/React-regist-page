@@ -3,7 +3,7 @@ import './App.css';
 /* --------------------- Component file --------------------- */
 import Register from './components/Register';
 /* --------------------- Table --------------------- */
-import { Table, TableRow, TableCell, TableHead, TableBody, Paper } from '@material-ui/core';
+import { Table, TableRow, TableCell, TableHead, TableBody, Paper, TextField, MenuItem, FormControl, FormLabel, FormControlLabel, InputLabel, OutlinedInput, Radio, RadioGroup } from '@material-ui/core';
 /* --------------------- App Bar --------------------- */
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -27,7 +27,10 @@ const styles = theme => ({
   Paper : {
     marginLeft : 18,
     marginRight : 18,
-    overflowY : 'hidden'
+    paddingLeft : 'auto',
+    paddingRight : 'auto',
+    overflowY : 'hidden',
+    alignItems : 'center',
   },
   root: {
     flexGrow: 1
@@ -82,21 +85,57 @@ const styles = theme => ({
     },
   },
   tableheadWidth : {
-    minwidth : '30%',
+    width : '40%',
   },
   tableLeft : {
     width : '30%',
   },
   tableRight : {
     width : '70%',
+  },
+  formstyles : {
+    align : 'center',
+  },
+  textmargin : {
+    marginTop : 10,
+    marginBottom : 10,
+  },
+  inputwidth : {
+    width : '200px',
+  },
+  inputradiodisplay : {
+    display : 'block',
   }
 });
+
+const selectoption = [
+  {
+    label : "日本",
+    value : "japan",
+  },
+  {
+    label : "中国",
+    value : "china",
+  },
+  {
+    label : "韓国",
+    value : "korea",
+  },
+  {
+    label : "その他",
+    value : "another",
+  },
+]
+
+
 
 class App extends Component {
 
   /* --------------------- state 初期化 --------------------- */
   state = {
-    registers : ""
+    loginID : "admin",
+    registers : "",
+    firstName : "",
   }
 
   /* --------------------- localhost:4000　連結 --------------------- */
@@ -123,7 +162,7 @@ class App extends Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-              Material-UI
+              エンジニア登録サイト
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -133,52 +172,116 @@ class App extends Component {
             </div>
           </Toolbar>
         </AppBar>
+
+        {/* ------------------ 入力フォーム ------------------ */}
         <div className={classes.menu}></div>
-        <Paper className={classes.Paper}>
-          <Table className={classes.table}>
-              <TableHead colspan="3" align="center">入力フォーム</TableHead>
-              <TableBody align="center">
-                <TableRow>
-                  <TableCell className={classes.tableLeft}>名前</TableCell>
-                  <TableCell>input</TableCell>
-                  <TableCell>input</TableCell>
-                  <TableCell>input</TableCell>
-                  <TableCell>input</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>bb</TableCell>
-                  <TableCell>input</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>cc</TableCell>
-                  <TableCell>input</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>dd</TableCell>
-                  <TableCell>input</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>ee</TableCell>
-                  <TableCell>input</TableCell>
-                </TableRow>
+        <form className={classes.root}>
+          <Paper className={classes.Paper} align="center">
+            <h2>エンジニア個人情報登録ページ</h2>
+
+            {/* ------------------ 名前 (text) ------------------ */}
+            <div className={classes.textmargin} >
+              <TextField id="name" className={classes.inputwidth} label="名前" value={this.state.name} variant="filled" />
+            </div>
+
+            {/* ------------------ 国 (select) ------------------ */}
+            <div className={classes.textmargin}>
+              <TextField variant="filled" label="国" select className={classes.inputwidth}>
+                { selectoption.map(c => {return(<MenuItem key={c.value} value={c.value} >{c.label}</MenuItem>)}) }
+              </TextField>
+            </div>
+
+            {/* ------------------ 所属 (radio) ------------------ */}
+            <div className={classes.textmargin} >
+              <FormControl >
+                <FormLabel>所属</FormLabel>
+                <RadioGroup className={classes.inputradiodisplay}>
+                  <FormControlLabel value="move" label="稼働中" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                  <FormControlLabel value="wait" label="待機中" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                  <FormControlLabel value="another" label="その他" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+            {/* ------------------ ステータス(radio) ------------------ */}
+            <div className={classes.textmargin}>
+            <FormControl>
+                <FormLabel>所属</FormLabel>
+                <RadioGroup className={classes.inputradiodisplay}>
+                  <FormControlLabel value="ContractEmployee" label="契約社員" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                  <FormControlLabel value="Full-timeEmployee" label="正社員" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                  <FormControlLabel value="SlefEmployee" label="個人事業主" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                  <FormControlLabel value="LivingAbroad" label="海外住み" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+            {/* ------------------ スキル (select) ------------------ */}
+            <div className={classes.textmargin}>
+            
+            </div>
+
+            {/* ------------------ 電話番号 (text) ------------------ */}
+            <div className={classes.textmargin}>
+              <TextField id="phoneNumber" className={classes.inputwidth} label="電話番号" value={this.state.name} variant="filled" />
+            </div>
+
+            {/* ------------------ 性別 (radio) ------------------ */}
+            <div className={classes.textmargin}>
+              <FormControl>
+                <FormLabel>所属</FormLabel>
+                <RadioGroup className={classes.inputradiodisplay}>
+                  <FormControlLabel value="Male" label="男" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                  <FormControlLabel value="Female" label="女" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+            {/* ------------------ 生年月日 (select) ------------------ */}
+            <div className={classes.textmargin}>
+              
+            </div>
+
+            {/* ------------------ 希望単価 (select) ------------------ */}
+            <div className={classes.textmargin}>
+              
+            </div>
+
+            {/* ------------------ 備考 (textarea) ------------------ */}
+            <div className={classes.textmargin}>
+              
+            </div>
+
+            {/* ------------------ 入力フォーム ------------------ */}
+            <div className={classes.textmargin}>
+              <FormControl variant="outlined" className={classes.inputwidth}>
+                <InputLabel>履歴</InputLabel>
+                <OutlinedInput startAdornment="Amount"></OutlinedInput>
+              </FormControl>
+            </div>
+          </Paper>
+        </form>
+
+        {/* ------------------ お客一覧 ------------------ */}
+        <div className={classes.menu}></div>
+        {
+          this.state.loginID === "admin" ?
+          <Paper className={classes.Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                { cellList.map(c => { return ( <TableCell className={classes.tableheadWidth}>{c}</TableCell>);})}
+              </TableHead>
+              <TableBody>
+                {
+                  this.state.registers ? this.state.registers.map(c => {
+                    return (<Register key={c.name} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />)
+                  }) : ""
+                }
               </TableBody>
-          </Table>
-        </Paper>
-        <div className={classes.menu}></div>
-        <Paper className={classes.Paper}>
-          <Table className={classes.table}>
-            <TableHead className={classes.tableheadWidth}>
-              { cellList.map(c => { return ( <TableCell >{c}</TableCell>);})}
-            </TableHead>
-            <TableBody>
-              {
-                this.state.registers ? this.state.registers.map(c => {
-                  return (<Register key={c.name} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />)
-                }) : ""
-              }
-            </TableBody>
-          </Table>
-        </Paper>
+            </Table>
+          </Paper>
+         : ""
+        }
       </div>
     )
   }
