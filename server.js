@@ -10,22 +10,25 @@ app.get('/api/registers', (req, res) => {
     res.send([
         {
           'name' : "1",
+          'country' : "japan",
           'birthday' : '1993.9.3',
           'gender' : 'man',
           'job' : 'progremer'
         },
         {
           'name' : "2",
+          'country' : "japan",
           'birthday' : '1993.9.3',
           'gender' : 'man',
           'job' : 'progremer'
         },
         {
           'name' : "3",
+          'country' : "japan",
           'birthday' : '1993.9.3',
           'gender' : 'man',
           'job' : 'progremer'
-        }
+        },
       ]);
 });
 

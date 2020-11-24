@@ -3,7 +3,7 @@ import './App.css';
 /* --------------------- Component file --------------------- */
 import Register from './components/Register';
 /* --------------------- Table --------------------- */
-import { Table, TableRow, TableCell, TableHead, TableBody, Paper, TextField, MenuItem, FormControl, FormLabel, FormControlLabel, InputLabel, OutlinedInput, Radio, RadioGroup } from '@material-ui/core';
+import { Table, TableRow, TableCell, TableHead, TableBody, Paper, TextField, MenuItem, FormControl, FormLabel, FormControlLabel, InputLabel, OutlinedInput, Radio, RadioGroup, Checkbox, FormGroup } from '@material-ui/core';
 /* --------------------- App Bar --------------------- */
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -84,8 +84,11 @@ const styles = theme => ({
       },
     },
   },
+  table : {
+    minWidth : 1200,
+  },
   tableheadWidth : {
-    width : '40%',
+    width : '150px',
   },
   tableLeft : {
     width : '30%',
@@ -97,15 +100,30 @@ const styles = theme => ({
     align : 'center',
   },
   textmargin : {
-    marginTop : 10,
-    marginBottom : 10,
+    marginTop : 20,
+    marginBottom : 20,
   },
   inputwidth : {
     width : '200px',
   },
   inputradiodisplay : {
     display : 'block',
-  }
+  },
+  titleborder : {
+    paddingBottom : 10,
+    borderBottom : "1px solid rgb(220,220,220)",
+  },
+  inputnameMargin : {
+    marginTop : 5,
+    marginBottom : 5,
+    marginLeft : 5,
+    marginRight : 5,
+    width : '200px',
+  },
+  inputStandardMargin : {
+    marginTop : 5,
+    marginBottom : 5,
+  },
 });
 
 const selectoption = [
@@ -127,7 +145,48 @@ const selectoption = [
   },
 ]
 
-
+const billoptions = [
+  {
+    value : "10万円~20万円",
+    label : "10万円~20万円",
+  },
+  {
+    value : "20万円~30万円",
+    label : "20万円~30万円",
+  },
+  {
+    value : "30万円~40万円",
+    label : "30万円~40万円",
+  },
+  {
+    value : "40万円~50万円",
+    label : "40万円~50万円",
+  },
+  {
+    value : "50万円~60万円",
+    label : "50万円~60万円",
+  },
+  {
+    value : "60万円~70万円",
+    label : "60万円~70万円",
+  },
+  {
+    value : "70万円~80万円",
+    label : "70万円~80万円",
+  },
+  {
+    value : "80万円~90万円",
+    label : "80万円~90万円",
+  },
+  {
+    value : "90万円~100万円",
+    label : "90万円~100万円",
+  },
+  {
+    value : "100万円以上",
+    label : "100万円以上",
+  },
+]
 
 class App extends Component {
 
@@ -136,6 +195,7 @@ class App extends Component {
     loginID : "admin",
     registers : "",
     firstName : "",
+    birthday : "",
   }
 
   /* --------------------- localhost:4000　連結 --------------------- */
@@ -152,7 +212,9 @@ class App extends Component {
   /* --------------------- render --------------------- */
   render(){
     const { classes } = this.props;
-    const cellList = ['名前','国籍','履歴','所属','ステータス','スキル','Eメール','電話番号','性別','生年月日','住所','希望単価','備考'];
+    const cellList = ['名前','国籍','所属','ステータス','スキル','電話番号','性別','生年月日','住所','希望単価','備考'];
+    const skillList = ['html/css','java','javascript','php','react','jquery','git'];
+
     /* --------------------- Return --------------------- */
     return(
       <div className={classes.root}>
@@ -177,18 +239,29 @@ class App extends Component {
         <div className={classes.menu}></div>
         <form className={classes.root}>
           <Paper className={classes.Paper} align="center">
-            <h2>エンジニア個人情報登録ページ</h2>
+            <h2 className={classes.titleborder}>エンジニア個人情報登録ページ</h2>
 
             {/* ------------------ 名前 (text) ------------------ */}
-            <div className={classes.textmargin} >
-              <TextField id="name" className={classes.inputwidth} label="名前" value={this.state.name} variant="filled" />
+            <div className={classes.textmargin}>
+              <FormControl>
+                <FormLabel>お名前</FormLabel>
+                <FormGroup className={classes.inputradiodisplay}>
+                  <TextField id="name" className={ classes.inputnameMargin} label="性(漢字)" value={this.state.name} variant="filled" />
+                  <TextField id="name" className={ classes.inputnameMargin} label="名前(漢字)" value={this.state.name} variant="filled" /><br></br>
+                  <TextField id="name" className={ classes.inputnameMargin} label="性(カタカナ)" value={this.state.name} variant="filled" />
+                  <TextField id="name" className={ classes.inputnameMargin} label="名前(カタカナ)" value={this.state.name} variant="filled" />
+                </FormGroup>
+              </FormControl>
             </div>
 
-            {/* ------------------ 国 (select) ------------------ */}
+            {/* ------------------ 国籍 (select) ------------------ */}
             <div className={classes.textmargin}>
-              <TextField variant="filled" label="国" select className={classes.inputwidth}>
-                { selectoption.map(c => {return(<MenuItem key={c.value} value={c.value} >{c.label}</MenuItem>)}) }
-              </TextField>
+              <FormControl>
+                <FormLabel>国籍</FormLabel>
+                <TextField variant="filled" label="国籍" select className={classes.inputwidth}>
+                  { selectoption.map(c => {return(<MenuItem key={c.value} value={c.value} >{c.label}</MenuItem>)}) }
+                </TextField>
+              </FormControl>
             </div>
 
             {/* ------------------ 所属 (radio) ------------------ */}
@@ -206,7 +279,7 @@ class App extends Component {
             {/* ------------------ ステータス(radio) ------------------ */}
             <div className={classes.textmargin}>
             <FormControl>
-                <FormLabel>所属</FormLabel>
+                <FormLabel>ステータス</FormLabel>
                 <RadioGroup className={classes.inputradiodisplay}>
                   <FormControlLabel value="ContractEmployee" label="契約社員" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
                   <FormControlLabel value="Full-timeEmployee" label="正社員" control={<Radio ></Radio>} labelPlacement="End"></FormControlLabel>
@@ -216,14 +289,22 @@ class App extends Component {
               </FormControl>
             </div>
 
-            {/* ------------------ スキル (select) ------------------ */}
+            {/* ------------------ スキル (checkbox) ------------------ */}
             <div className={classes.textmargin}>
-            
+              <FormControl>
+                <FormLabel>スキル</FormLabel>
+                <FormGroup className={classes.inputradiodisplay}>
+                  { skillList.map(c => {return(<FormControlLabel labelPlacement="end" label={c} control={<Checkbox></Checkbox>} value={c}></FormControlLabel>)})}
+                </FormGroup>
+              </FormControl>
             </div>
 
             {/* ------------------ 電話番号 (text) ------------------ */}
             <div className={classes.textmargin}>
-              <TextField id="phoneNumber" className={classes.inputwidth} label="電話番号" value={this.state.name} variant="filled" />
+              <FormControl>
+                <FormLabel>電話番号</FormLabel>
+                <TextField id="phoneNumber" className={classes.inputwidth} label="電話番号" value={this.state.name} variant="filled" />
+              </FormControl>
             </div>
 
             {/* ------------------ 性別 (radio) ------------------ */}
@@ -239,12 +320,31 @@ class App extends Component {
 
             {/* ------------------ 生年月日 (select) ------------------ */}
             <div className={classes.textmargin}>
-              
+              <FormControl>
+                <FormLabel>生年月日</FormLabel>
+                <TextField type="date" id="date"></TextField>
+              </FormControl>
+            </div>
+
+            {/* ------------------ 住所 (select) ------------------ */}
+            <div className={classes.textmargin}>
+              <FormControl>
+                <FormLabel>住所</FormLabel>
+                <FormGroup >
+                  <TextField className={classes.inputStandardMargin} variant="filled" label="郵便番号"></TextField>
+                  <TextField className={classes.inputStandardMargin} variant="filled" label="住所"></TextField>
+                </FormGroup>
+              </FormControl>
             </div>
 
             {/* ------------------ 希望単価 (select) ------------------ */}
             <div className={classes.textmargin}>
-              
+              <FormControl>
+                <FormLabel>希望単価</FormLabel>
+                <TextField variant="filled" label="希望単価" select className={classes.inputwidth}>
+                  { billoptions.map(c => {return(<MenuItem  key={c.value} value={c.value} >{c.label}</MenuItem>)}) }
+                </TextField>
+              </FormControl>
             </div>
 
             {/* ------------------ 備考 (textarea) ------------------ */}
@@ -268,13 +368,13 @@ class App extends Component {
           this.state.loginID === "admin" ?
           <Paper className={classes.Paper}>
             <Table className={classes.table}>
-              <TableHead>
-                { cellList.map(c => { return ( <TableCell className={classes.tableheadWidth}>{c}</TableCell>);})}
+              <TableHead className={classes.tableheadWidth}>
+                { cellList.map(c => { return ( <TableCell >{c}</TableCell>);})}
               </TableHead>
               <TableBody>
                 {
                   this.state.registers ? this.state.registers.map(c => {
-                    return (<Register key={c.name} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job} />)
+                    return (<Register key={c.name} name={c.name} country={c.country} birthday={c.birthday} gender={c.gender} job={c.job} />)
                   }) : ""
                 }
               </TableBody>

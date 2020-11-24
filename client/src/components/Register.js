@@ -6,11 +6,9 @@ class Register extends React.Component{
         return(
             <TableRow>
                 <TableCell>{this.props.name}</TableCell>
+                <TableCell>{this.props.country}</TableCell>
                 <TableCell>{this.props.birthday}</TableCell>
                 <TableCell>{this.props.gender}</TableCell>
-                <TableCell>{this.props.job}</TableCell>
-                <TableCell>{this.props.job}</TableCell>
-                <TableCell>{this.props.job}</TableCell>
                 <TableCell>{this.props.job}</TableCell>
                 <TableCell>{this.props.job}</TableCell>
                 <TableCell>{this.props.job}</TableCell>
