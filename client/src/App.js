@@ -212,7 +212,7 @@ class App extends Component {
   /* --------------------- render --------------------- */
   render(){
     const { classes } = this.props;
-    const cellList = ['名前','国籍','所属','ステータス','スキル','電話番号','性別','生年月日','住所','希望単価','備考'];
+    const cellList = ['id','名前','国籍','所属','ステータス','スキル','電話番号','性別','生年月日','住所','希望単価','備考'];
     const skillList = ['html/css','java','javascript','php','react','jquery','git'];
 
     /* --------------------- Return --------------------- */
@@ -374,7 +374,7 @@ class App extends Component {
               <TableBody>
                 {
                   this.state.registers ? this.state.registers.map(c => {
-                    return (<Register key={c.name} name={c.name} country={c.country} birthday={c.birthday} gender={c.gender} job={c.job} />)
+                    return (<Register key={c.id} id={c.id} name={c.name} country={c.country} belongs={c.belongs} status={c.status} skill={c.skill} tel={c.tel} gender={c.gender} birthday={c.birthday} adress={c.adress} bill={c.bill} note={c.note} />)
                   }) : ""
                 }
               </TableBody>
