@@ -178,6 +178,29 @@ const billoptions = [
     },
 ]
   
+const skillList = [
+    {
+        value : 'html/css'
+    },
+    {
+        value : 'java'
+    },
+    {
+        value : 'javascript'
+    },
+    {
+        value : 'php'
+    },
+    {
+        value : 'react'
+    },
+    {
+        value : 'jquery'
+    },
+    {
+        value : 'git'
+    }
+];
 
 class RegisterAdd extends React.Component {
     constructor(props){
@@ -188,7 +211,7 @@ class RegisterAdd extends React.Component {
             country : '',
             belongs : '',
             status : '',
-            skill : '',
+            skill : [],
             tel : '',
             gender : '',
             birthday : '',
@@ -234,10 +257,17 @@ class RegisterAdd extends React.Component {
         this.setState(nextState);
     }
 
+    handleCheckValueChange = (e) => {
+        if(this.state.skill.includes(e.target.value)){
+            this.state.skill.splice(e.target.value, 1);
+        }else{
+            this.state.skill.push(e.target.value);
+        }
+    }
+
     render(){
         const { classes } = this.props;
-        const skillList = ['html/css','java','javascript','php','react','jquery','git'];
-    
+        
         return(
             <form className={classes.root} onSubmit={this.handleFormSubmit}>
                 <Paper className={classes.Paper} align="center">
@@ -292,8 +322,8 @@ class RegisterAdd extends React.Component {
                     <div className={classes.textmargin}>
                         <FormControl>
                             <FormLabel>スキル</FormLabel>
-                            <FormGroup className={classes.inputradiodisplay} name="skill" value={this.state.skill} onChange={this.handleValueChange}>
-                                { skillList.map(c => {return(<FormControlLabel name="skill[]" key={c} value={c} label={c} control={<Checkbox></Checkbox>} ></FormControlLabel>)}) }
+                            <FormGroup className={classes.inputradiodisplay} >
+                                { skillList.map(c => {return(<FormControlLabel name={c} value={this.state.value} onChange={this.handleCheckValueChange}　label={c.value} control={<Checkbox key={c.value} value={c.value}></Checkbox>}></FormControlLabel>)}) }
                             </FormGroup>
                         </FormControl>
                     </div>
@@ -350,8 +380,8 @@ class RegisterAdd extends React.Component {
                     <div className={classes.textmargin}>
                         <FormControl>
                             <FormLabel>備考</FormLabel>
-                            <FormGroup name="note" value={this.state.note} className={classes.inputradiodisplay} onChange={this.handleValueChange}>
-                                <TextField className={ classes.inputnameMargin} label="備考" variant="filled" />
+                            <FormGroup  className={classes.inputradiodisplay}>
+                                <TextField name="note" value={this.state.note} onChange={this.handleValueChange} className={ classes.inputnameMargin } label="備考" variant="filled" />
                             </FormGroup>
                         </FormControl>
                     </div>
